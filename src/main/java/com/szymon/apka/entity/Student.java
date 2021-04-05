@@ -27,7 +27,7 @@ public class Student {
     private String fieldOfStudy;
 
     @ManyToMany(mappedBy = "students")
-    private Set<Teacher> employees = new HashSet<>();
+    private Set<Teacher> teachers = new HashSet<>();
 
     public Student() {
     }

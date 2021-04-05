@@ -41,4 +41,8 @@ public class StudentService {
 
         return false;
     }
+
+    public Optional<Student> findStudentByFirstAndLastName(String firstName, String lastName) {
+        return this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
 }

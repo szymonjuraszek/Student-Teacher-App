@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 public class TeacherController {
@@ -43,7 +44,7 @@ public class TeacherController {
 
         boolean isDeleted = this.teacherService.deleteTeacher(id);
 
-        if(!isDeleted) {
+        if (!isDeleted) {
             return ResponseEntity.notFound().build();
         }
 
@@ -57,11 +58,23 @@ public class TeacherController {
 
         boolean ifUpdated = this.teacherService.updateTeacher(id, teacher);
 
-        if(!ifUpdated) {
+        if (!ifUpdated) {
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(path = "/teacher")
+    public ResponseEntity<Teacher> findStudentByFirstAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+
+        Optional<Teacher> teacher = this.teacherService.findTeacherByFirstAndLastName(firstName, lastName);
+
+        if (teacher.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(teacher.get());
     }
 
     private Teacher convertToEntity(TeacherDTO teacherDTO) {

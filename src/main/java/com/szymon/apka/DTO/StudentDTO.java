@@ -33,5 +33,5 @@ public class StudentDTO {
     private String fieldOfStudy;
 
     @JsonProperty
-    private Set<Teacher> employees = new HashSet<>();
+    private Set<Teacher> teachers = new HashSet<>();
 }

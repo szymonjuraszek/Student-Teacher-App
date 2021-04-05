@@ -42,4 +42,8 @@ public class TeacherService {
 
         return false;
     }
+
+    public Optional<Teacher> findTeacherByFirstAndLastName(String firstName, String lastName) {
+        return this.teacherRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
 }
