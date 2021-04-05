@@ -1,7 +1,9 @@
 package com.szymon.apka.service;
 
 import com.szymon.apka.entity.Student;
+import com.szymon.apka.exception.RelationStudentTeacherExistsException;
 import com.szymon.apka.repository.StudentRepository;
+import com.szymon.apka.repository.StudentTeacherRelationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,11 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    private final StudentTeacherRelationRepository relationRepository;
+
+    public StudentService(StudentRepository studentRepository, StudentTeacherRelationRepository relationRepository) {
         this.studentRepository = studentRepository;
+        this.relationRepository = relationRepository;
     }
 
     public Student addStudent(Student student) {
@@ -23,8 +28,14 @@ public class StudentService {
 
     public boolean deleteStudent(Long id) {
 
+        if(this.relationRepository.checkIfRelationExistsForStudentId(id) == 1) {
+            throw new RelationStudentTeacherExistsException("Can't delete Student with id: " + id + " , because relation exists");
+        }
+
         if (this.studentRepository.existsById(id)) {
             this.studentRepository.deleteById(id);
+
+            return true;
         }
 
         return false;

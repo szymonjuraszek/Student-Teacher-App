@@ -50,4 +50,16 @@ public class StudentTeacherRelationService {
 
         return true;
     }
+
+    public boolean removeRelation(Long studentId, Long teacherId) {
+        StudentTeacherRelationKey key = new StudentTeacherRelationKey(studentId, teacherId);
+
+        if(this.relationRepository.existsById(key)) {
+            this.relationRepository.deleteById(key);
+
+            return true;
+        }
+
+        return false;
+    }
 }

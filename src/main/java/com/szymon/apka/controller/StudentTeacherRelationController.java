@@ -2,9 +2,7 @@ package com.szymon.apka.controller;
 
 import com.szymon.apka.service.StudentTeacherRelationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentTeacherRelationController {
@@ -23,6 +21,17 @@ public class StudentTeacherRelationController {
     @PostMapping(path = "/teachers/{teacherId}/students/{studentId}")
     public ResponseEntity<Object> addStudentToTeacher(@PathVariable Long studentId, @PathVariable Long teacherId) {
         return addRelation(studentId, teacherId);
+    }
+
+    @DeleteMapping(path = "/relation/studentTeacher")
+    public ResponseEntity<Object> removeRelation(@RequestParam Long studentId, @RequestParam Long teacherId) {
+        boolean ifRemoved = this.relationService.removeRelation(studentId, teacherId);
+
+        if(!ifRemoved) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     private ResponseEntity<Object> addRelation(Long studentId, Long teacherId) {
