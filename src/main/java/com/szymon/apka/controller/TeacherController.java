@@ -1,15 +1,19 @@
 package com.szymon.apka.controller;
 
 import com.szymon.apka.DTO.TeacherDTO;
+import com.szymon.apka.entity.Student;
 import com.szymon.apka.entity.Teacher;
 import com.szymon.apka.service.TeacherService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -75,6 +79,11 @@ public class TeacherController {
         }
 
         return ResponseEntity.ok().body(teacher.get());
+    }
+
+    @GetMapping(path = "/teachers")
+    public Page<Teacher> getAllTeachers(Pageable pageable) {
+        return this.teacherService.getAllTeachersByPage(pageable);
     }
 
     private Teacher convertToEntity(TeacherDTO teacherDTO) {

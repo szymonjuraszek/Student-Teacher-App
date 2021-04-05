@@ -11,6 +11,9 @@ import java.util.Set;
 @Data
 public class TeacherDTO {
 
+    @JsonProperty
+    private Long teacherId;
+
     @Size(min = 2, message = "Field: 'firstName' must have more than 2 letters.")
     @NotNull(message = "Field: 'firstName' can't be NULL.")
     private String firstName;

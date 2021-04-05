@@ -2,6 +2,8 @@ package com.szymon.apka.service;
 
 import com.szymon.apka.entity.Student;
 import com.szymon.apka.repository.StudentRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -46,5 +48,7 @@ public class StudentService {
         return this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-
+    public Page<Student> getAllStudentsByPage(Pageable pageable) {
+        return this.studentRepository.findAll(pageable);
+    }
 }

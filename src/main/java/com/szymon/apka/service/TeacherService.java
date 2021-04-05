@@ -3,6 +3,8 @@ package com.szymon.apka.service;
 import com.szymon.apka.entity.Student;
 import com.szymon.apka.entity.Teacher;
 import com.szymon.apka.repository.TeacherRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -45,5 +47,9 @@ public class TeacherService {
 
     public Optional<Teacher> findTeacherByFirstAndLastName(String firstName, String lastName) {
         return this.teacherRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
+    public Page<Teacher> getAllTeachersByPage(Pageable pageable) {
+        return this.teacherRepository.findAll(pageable);
     }
 }

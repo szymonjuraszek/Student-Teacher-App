@@ -4,12 +4,16 @@ import com.szymon.apka.DTO.StudentDTO;
 import com.szymon.apka.entity.Student;
 import com.szymon.apka.service.StudentService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -77,7 +81,10 @@ public class StudentController {
         return ResponseEntity.ok().body(student.get());
     }
 
-
+    @GetMapping(path = "/students")
+    public Page<Student> getAllStudents(Pageable pageable) {
+        return this.studentService.getAllStudentsByPage(pageable);
+    }
 
     private Student convertToEntity(StudentDTO studentDTO) {
         return modelMapper.map(studentDTO, Student.class);
