@@ -33,7 +33,7 @@ public class TeacherController {
 
         URI location = UriComponentsBuilder
                 .fromPath("/teachers/{id}")
-                .buildAndExpand(savedTeacher.getId())
+                .buildAndExpand(savedTeacher.getTeacherId())
                 .toUri();
 
         return ResponseEntity.created(location).build();

@@ -14,7 +14,7 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long teacherId;
 
     private String firstName;
 
@@ -26,13 +26,8 @@ public class Teacher {
 
     private String subject;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "Student_Teacher",
-            joinColumns = { @JoinColumn(name = "teacher_id") },
-            inverseJoinColumns = { @JoinColumn(name = "student_id") }
-    )
-    private Set<Student> students = new HashSet<>();
+    @OneToMany(mappedBy = "teacher")
+    private Set<StudentTeacher> students = new HashSet<>();
 
     public Teacher() {
     }

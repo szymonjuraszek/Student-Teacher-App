@@ -21,7 +21,7 @@ public class StudentService {
 
     public boolean deleteStudent(Long id) {
 
-        if(this.studentRepository.existsById(id)) {
+        if (this.studentRepository.existsById(id)) {
             this.studentRepository.deleteById(id);
         }
 
@@ -32,8 +32,8 @@ public class StudentService {
 
         Optional<Student> currentStudent = this.studentRepository.findById(id);
 
-        if(currentStudent.isPresent()) {
-            student.setId(id);
+        if (currentStudent.isPresent()) {
+            student.setStudentId(id);
             this.studentRepository.save(student);
 
             return true;
@@ -45,4 +45,6 @@ public class StudentService {
     public Optional<Student> findStudentByFirstAndLastName(String firstName, String lastName) {
         return this.studentRepository.findByFirstNameAndLastName(firstName, lastName);
     }
+
+
 }

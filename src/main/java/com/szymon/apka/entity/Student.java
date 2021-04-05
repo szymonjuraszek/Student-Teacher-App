@@ -14,7 +14,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long studentId;
 
     private String firstName;
 
@@ -26,8 +26,8 @@ public class Student {
 
     private String fieldOfStudy;
 
-    @ManyToMany(mappedBy = "students")
-    private Set<Teacher> teachers = new HashSet<>();
+    @OneToMany(mappedBy = "student")
+    private Set<StudentTeacher> teachers = new HashSet<>();
 
     public Student() {
     }

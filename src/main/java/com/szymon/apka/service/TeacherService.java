@@ -22,7 +22,7 @@ public class TeacherService {
 
     public boolean deleteTeacher(Long id) {
 
-        if(this.teacherRepository.existsById(id)) {
+        if (this.teacherRepository.existsById(id)) {
             this.teacherRepository.deleteById(id);
         }
 
@@ -33,8 +33,8 @@ public class TeacherService {
 
         Optional<Teacher> currentTeacher = this.teacherRepository.findById(id);
 
-        if(currentTeacher.isPresent()) {
-            teacher.setId(id);
+        if (currentTeacher.isPresent()) {
+            teacher.setTeacherId(id);
             this.teacherRepository.save(teacher);
 
             return true;

@@ -33,7 +33,7 @@ public class StudentController {
 
         URI location = UriComponentsBuilder
                 .fromPath("/students/{id}")
-                .buildAndExpand(savedStudent.getId())
+                .buildAndExpand(savedStudent.getStudentId())
                 .toUri();
 
         return ResponseEntity.created(location).build();
@@ -76,6 +76,8 @@ public class StudentController {
 
         return ResponseEntity.ok().body(student.get());
     }
+
+
 
     private Student convertToEntity(StudentDTO studentDTO) {
         return modelMapper.map(studentDTO, Student.class);
