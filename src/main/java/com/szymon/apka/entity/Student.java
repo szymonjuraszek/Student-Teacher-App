@@ -1,11 +1,14 @@
 package com.szymon.apka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -13,7 +16,7 @@ import java.util.Set;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long studentId;
 
     private String firstName;
@@ -26,8 +29,9 @@ public class Student {
 
     private String fieldOfStudy;
 
-    @OneToMany(mappedBy = "student")
-    private Set<StudentTeacher> teachers = new HashSet<>();
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<StudentTeacher> teachers = new ArrayList<>();
 
     public Student() {
     }

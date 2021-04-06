@@ -1,13 +1,16 @@
 package com.szymon.apka.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-@Data
+@Setter
+@Getter
 public class StudentTeacherRelationKey implements Serializable {
 
     @Column(name = "student_id")

@@ -1,22 +1,26 @@
 package com.szymon.apka.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class StudentTeacher {
 
     @EmbeddedId
     StudentTeacherRelationKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
     Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("teacherId")
     @JoinColumn(name = "teacher_id")
     Teacher teacher;

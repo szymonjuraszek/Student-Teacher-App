@@ -6,14 +6,12 @@ import com.szymon.apka.service.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -70,7 +68,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "/student")
-    public ResponseEntity<Student> findStudentByFirstAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public ResponseEntity<StudentDTO> findStudentByFirstAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 
         Optional<Student> student = this.studentService.findStudentByFirstAndLastName(firstName, lastName);
 
@@ -78,7 +76,7 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().body(student.get());
+        return ResponseEntity.ok().body(convertToDto(student.get()));
     }
 
     @GetMapping(path = "/students")
