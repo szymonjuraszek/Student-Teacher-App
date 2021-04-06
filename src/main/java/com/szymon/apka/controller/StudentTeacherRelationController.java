@@ -2,19 +2,12 @@ package com.szymon.apka.controller;
 
 import com.szymon.apka.DTO.StudentDTO;
 import com.szymon.apka.DTO.TeacherDTO;
-import com.szymon.apka.entity.Student;
-import com.szymon.apka.entity.StudentTeacher;
-import com.szymon.apka.entity.Teacher;
 import com.szymon.apka.service.StudentTeacherRelationService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Type;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController

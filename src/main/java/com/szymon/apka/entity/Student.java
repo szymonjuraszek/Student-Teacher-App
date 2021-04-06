@@ -1,14 +1,10 @@
 package com.szymon.apka.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,7 +27,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<StudentTeacher> teachers = new ArrayList<>();
+    private Set<StudentTeacher> teachers = new HashSet<>();
 
     public Student() {
     }

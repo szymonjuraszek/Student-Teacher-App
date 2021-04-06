@@ -31,7 +31,7 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<StudentTeacher> students = new ArrayList<>();
+    private Set<StudentTeacher> students = new HashSet<>();
 
     public Teacher() {
     }

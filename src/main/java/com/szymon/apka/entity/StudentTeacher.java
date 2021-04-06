@@ -1,7 +1,5 @@
 package com.szymon.apka.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

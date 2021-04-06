@@ -2,6 +2,7 @@ package com.szymon.apka.controller;
 
 import com.szymon.apka.DTO.StudentDTO;
 import com.szymon.apka.entity.Student;
+import com.szymon.apka.exception.NotFoundByIdException;
 import com.szymon.apka.service.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -47,7 +48,7 @@ public class StudentController {
         boolean isDeleted = this.studentService.deleteStudent(id);
 
         if (!isDeleted) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundByIdException("Not found Student with id: " + id);
         }
 
         return ResponseEntity.ok().build();
@@ -61,7 +62,7 @@ public class StudentController {
         boolean ifUpdated = this.studentService.updateStudent(id, student);
 
         if (!ifUpdated) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundByIdException("Not found Student with id: " + id);
         }
 
         return ResponseEntity.ok().build();
@@ -73,7 +74,7 @@ public class StudentController {
         Optional<Student> student = this.studentService.findStudentByFirstAndLastName(firstName, lastName);
 
         if (student.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundByIdException("Not found Student by firstName: " + firstName + " and lastName: " + lastName);
         }
 
         return ResponseEntity.ok().body(convertToDto(student.get()));

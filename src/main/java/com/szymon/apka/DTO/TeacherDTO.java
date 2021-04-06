@@ -1,15 +1,9 @@
 package com.szymon.apka.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.szymon.apka.entity.Student;
-import com.szymon.apka.entity.StudentTeacher;
 import lombok.Data;
 
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Data
 public class TeacherDTO {
