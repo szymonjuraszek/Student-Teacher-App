@@ -1,5 +1,6 @@
 package com.szymon.apka.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -8,7 +9,8 @@ import javax.validation.constraints.*;
 @Data
 public class TeacherDTO {
 
-    @JsonProperty
+    @JsonIgnore
+    @JsonProperty(value = "teacherId")
     private Long teacherId;
 
     @Size(min = 2, message = "Field: 'firstName' must have more than 2 letters.")
